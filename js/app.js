@@ -220,8 +220,20 @@ function cambiandoColores() {
                 matriz[x / DIMENSION][(y / DIMENSION) + j] = 'n'
             }
         }
-
+        //Validacion arriba
+        if (matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'a') {
+            for (let i = 1; i < matriz.length; i++) {
+                if (matriz[x / DIMENSION][(y / DIMENSION) - i] == 'n') {
+                    break;
+                }
+                matriz[x / DIMENSION][(y / DIMENSION) - i] = 'n'
+            }
+        }
     }
+
+
+
+
 
     dibujarFichasPrincipales();
 }
