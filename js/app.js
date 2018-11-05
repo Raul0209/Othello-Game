@@ -210,50 +210,64 @@ var tecla = {
 
 function cambiandoColores() {
     console.log(x / DIMENSION, y / DIMENSION)
-    if (turno == true) {
-
-        if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'a' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'n') {
-            matriz[(x / DIMENSION) + 1][y / DIMENSION] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'a' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'x') {
-            matriz[(x / DIMENSION) - 1][y / DIMENSION] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'a' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'n') {
-            matriz[x / DIMENSION][(y / DIMENSION) + 1] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'a' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'x') {
-            matriz[x / DIMENSION][(y / DIMENSION) - 1] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] == 'a' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) + 2] == 'n') {
-            matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] == 'a' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) - 2] == 'n') {
-            matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] == 'a' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) - 2] == 'n') {
-            matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] = 'n'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] == 'a' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) + 2] == 'n') {
-            matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] = 'n'
-        }
-        dibujarFichasPrincipales();
-    }
-
-    if (turno == false) {
-        if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'n' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'a') {
-            matriz[(x / DIMENSION) + 1][y / DIMENSION] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'n' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'x') {
-            matriz[(x / DIMENSION) - 1][y / DIMENSION] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'n' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'a') {
-            matriz[x / DIMENSION][(y / DIMENSION) + 1] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'n' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'x') {
-            matriz[x / DIMENSION][(y / DIMENSION) - 1] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] == 'n' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) + 2] == 'a') {
-            matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] == 'n' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) - 2] == 'a') {
-            matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] == 'n' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) - 2] == 'a') {
-            matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] = 'a'
-        } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] == 'n' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) + 2] == 'a') {
-            matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] = 'a'
+    if (turno == true && matriz[x / DIMENSION][y / DIMENSION] == 'x') {
+        //Validacion abajo
+        if (matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'a') {
+            for (let j = 1; j < matriz.length; j++) {
+                if (matriz[x / DIMENSION][(y / DIMENSION) + j] == 'n') {
+                    break;
+                }
+                matriz[x / DIMENSION][(y / DIMENSION) + j] = 'n'
+            }
         }
 
-
-
-
-        dibujarFichasPrincipales();
     }
+
+    dibujarFichasPrincipales();
 }
+
+
+// if (turno == true) {
+
+//     if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'a' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'n') {
+//         matriz[(x / DIMENSION) + 1][y / DIMENSION] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'a' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'x') {
+//         matriz[(x / DIMENSION) - 1][y / DIMENSION] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'a' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'n') {
+//         matriz[x / DIMENSION][(y / DIMENSION) + 1] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'a' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'x') {
+//         matriz[x / DIMENSION][(y / DIMENSION) - 1] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] == 'a' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) + 2] == 'n') {
+//         matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] == 'a' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) - 2] == 'n') {
+//         matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] == 'a' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) - 2] == 'n') {
+//         matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] = 'n'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] == 'a' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) + 2] == 'n') {
+//         matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] = 'n'
+//     }
+//     dibujarFichasPrincipales();
+// } else if (turno == false) {
+//     if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'n' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'a') {
+//         matriz[(x / DIMENSION) + 1][y / DIMENSION] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'n' && matriz[(x / DIMENSION) + 2][y / DIMENSION] == 'x') {
+//         matriz[(x / DIMENSION) - 1][y / DIMENSION] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'n' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'a') {
+//         matriz[x / DIMENSION][(y / DIMENSION) + 1] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'n' && matriz[x / DIMENSION][(y / DIMENSION) + 2] == 'x') {
+//         matriz[x / DIMENSION][(y / DIMENSION) - 1] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] == 'n' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) + 2] == 'a') {
+//         matriz[(x / DIMENSION) + 1][(y / DIMENSION) + 1] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] == 'n' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) - 2] == 'a') {
+//         matriz[(x / DIMENSION) - 1][(y / DIMENSION) - 1] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] == 'n' && matriz[(x / DIMENSION) + 2][(y / DIMENSION) - 2] == 'a') {
+//         matriz[(x / DIMENSION) + 1][(y / DIMENSION) - 1] = 'a'
+//     } else if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] == 'n' && matriz[(x / DIMENSION) - 2][(y / DIMENSION) + 2] == 'a') {
+//         matriz[(x / DIMENSION) - 1][(y / DIMENSION) + 1] = 'a'
+//     }
+
+
+
+
+//     dibujarFichasPrincipales();
+// }
