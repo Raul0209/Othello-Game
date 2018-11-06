@@ -1,13 +1,14 @@
-body{
+body {
     padding-bottom: 50px;
 }
-.main-container{
+
+.main-container {
     margin-top: 20px;
     margin-left: 25%;
 }
 
-footer{
-    color: bLACK;
+footer {
+    color: BLACK;
     position: fixed;
     bottom: 0px;
     width: 100%;
