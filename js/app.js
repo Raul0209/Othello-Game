@@ -101,7 +101,7 @@ function movimiento(evento) {
 
 function colorPosicion() {
     if (turno == true) {
-        if (matriz[x / DIMENSION][y / DIMENSION] == 'x' && || matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'a' || matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'a' || matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'a' || matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'a') {
+        if (matriz[x / DIMENSION][y / DIMENSION] == 'x' || matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'a' || matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'a' || matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'a' || matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'a') {
             // if (matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'a' || matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'a' || matriz[x / DIMENSION][(y / DIMENSION) + 1] == 'a' || matriz[x / DIMENSION][(y / DIMENSION) - 1] == 'a') {
             matriz[x / DIMENSION][y / DIMENSION] = 'n'
             turno = false
