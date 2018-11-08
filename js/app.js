@@ -183,10 +183,10 @@ function ganador() {
                 colorN = colorN + 1;
             } else if (matriz[columna][fila] == 'a') {
                 colorA = colorA + 1;
-            }
-        }
-    }
-}
+            };
+        };
+    };
+};
 
 function turnos() {
 
@@ -224,10 +224,10 @@ function cambiandoColores() {
                         matriz[x / DIMENSION][(y / DIMENSION) + i] = 'n'
                     } else {
                         break;
-                    }
-                }
-            }
-        }
+                    };
+                };
+            };
+        };
 
         if (y / DIMENSION > 1) {
             //Validacion arriba
@@ -239,10 +239,11 @@ function cambiandoColores() {
                         matriz[x / DIMENSION][(y / DIMENSION) - i] = 'n'
                     } else {
                         break;
-                    }
-                }
-            }
-        }
+                    };
+                };
+            };
+        };
+
         if (x / DIMENSION < 6) {
             //Validacion derecha
             if (matriz[(x / DIMENSION) + 1][y / DIMENSION] == 'a') {
@@ -253,10 +254,11 @@ function cambiandoColores() {
                         matriz[(x / DIMENSION) + i][y / DIMENSION] = 'n'
                     } else {
                         break;
-                    }
-                }
-            }
-        }
+                    };
+                };
+            };
+        };
+
         if (x / DIMENSION > 1) {
             //validacion izquierda
             if (matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'a') {
@@ -267,11 +269,11 @@ function cambiandoColores() {
                         matriz[(x / DIMENSION) - i][y / DIMENSION] = 'n'
                     } else {
                         break;
-                    }
-                }
-            }
-        }
-    }
+                    };
+                };
+            };
+        };
+    };
 
     //Amarillas
     if (turno == false && matriz[x / DIMENSION][y / DIMENSION] == 'x') {
@@ -285,10 +287,10 @@ function cambiandoColores() {
                         matriz[x / DIMENSION][(y / DIMENSION) + j] = 'a'
                     } else {
                         break;
-                    }
-                }
-            }
-        }
+                    };
+                };
+            };
+        };
 
         if (y / DIMENSION > 1) {
             //Validacion arriba
@@ -296,11 +298,14 @@ function cambiandoColores() {
                 for (let i = 1; i < matriz.length; i++) {
                     if (matriz[x / DIMENSION][(y / DIMENSION) - i] == 'a') {
                         break;
-                    }
-                    matriz[x / DIMENSION][(y / DIMENSION) - i] = 'a'
-                }
-            }
-        }
+                    } else if (matriz[x / DIMENSION][(y / DIMENSION) - i] == 'n') {
+                        matriz[x / DIMENSION][(y / DIMENSION) - i] = 'a'
+                    } else {
+                        break;
+                    };
+                };
+            };
+        };
 
         if (x / DIMENSION < 6) {
             //Validacion derecha
@@ -308,22 +313,29 @@ function cambiandoColores() {
                 for (let i = 1; i < matriz.length; i++) {
                     if (matriz[(x / DIMENSION) + i][y / DIMENSION] == 'a') {
                         break;
+                    } else if (matriz[(x / DIMENSION) + i][(y / DIMENSION)] == 'n') {
+                        matriz[(x / DIMENSION) + i][y / DIMENSION] = 'a'
+                    } else {
+                        break;
                     }
-                    matriz[(x / DIMENSION) + i][y / DIMENSION] = 'a'
-                }
-            }
-        }
+                };
+            };
+        };
         if (x / DIMENSION > 1) {
             //validacion izquierda
             if (matriz[(x / DIMENSION) - 1][y / DIMENSION] == 'n') {
                 for (let i = 1; i < matriz.length; i++) {
                     if (matriz[(x / DIMENSION) - i][y / DIMENSION] == 'a') {
                         break;
+                    } else if (matriz[(x / DIMENSION) - i][y / DIMENSION] == 'n') {
+                        matriz[(x / DIMENSION) - i][y / DIMENSION] = 'a'
+                    } else {
+                        break;
                     }
-                    matriz[(x / DIMENSION) - i][y / DIMENSION] = 'a'
-                }
-            }
-        }
-    }
+
+                };
+            };
+        };
+    };
     dibujarFichasPrincipales();
-}
+};
