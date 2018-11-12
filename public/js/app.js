@@ -1,14 +1,19 @@
 document.addEventListener("keydown", movimiento);
 var canvas = document.getElementById('fondo');
 var lapiz = canvas.getContext('2d');
+var btnGuardar = document.getElementById('guardar');
 const DIMENSION = 50;
 var x = 400;
 var y = 0;
 var turno = true;
 var contador = 0;
 var matriz = new Array(8);
-var colorA;
-var colorN;
+var lblNegro = document.getElementById('punteoNegras');
+var lblAmarillo = document.getElementById('punteoBlancas');
+var refDB = firebase.database().ref('usuarios');
+var usuario = {}
+var conteoNegras = 0
+var conteoAmarillas = 0
 
 var fondo = {
     url: './Imagenes/Tablero.png',
@@ -91,9 +96,16 @@ function movimiento(evento) {
         case tecla.ENTER:
             cambiandoColores();
             colorPosicion();
-            if (contador > 59) {
-                alert(colorA && ColorN)
+            if (contador == 60) {
+                alert('Fin del Juego');
             };
+            if (contador == 60 && fBlancas > fNegras) {
+                alert('Ganan las Blancas');
+            } else if (contador == 60 && fblancas < fNegras) {
+                alert('Ganan las negras');
+            } else if (contador == 60 && fblancas == fNegras) {
+                alert('Empatados')
+            }
             break;
     };
 
@@ -109,6 +121,7 @@ function colorPosicion() {
             y = 0;
             turnos();
             dibujar();
+            ganador();
             contador = contador + 1;
         } else {
             alert("Posicion Invalida");
@@ -122,14 +135,12 @@ function colorPosicion() {
             y = 0;
             turnos();
             dibujar();
+            ganador();
             contador = contador + 1;
         }
     } else {
         alert("Posicion Invalida");
     };
-
-
-
 }; //llave principal
 
 function dibujar() {
@@ -177,15 +188,22 @@ function dibujarFichasPrincipales() {
 };
 
 function ganador() {
+    var fBlancas = 0;
+    var fNegras = 0;
+
     for (var columna = 0; columna < matriz.length; columna++) {
         for (var fila = 0; fila < matriz.length; fila++) {
             if (matriz[columna][fila] == 'n') {
-                colorN = colorN + 1;
+                fNegras++;
             } else if (matriz[columna][fila] == 'a') {
-                colorA = colorA + 1;
+                fBlancas++;
             };
         };
     };
+    conteoAmarillas = fBlancas;
+    conteoNegras = fNegras;
+    lblAmarillo.value = fBlancas;
+    lblNegro.value = fNegras;
 };
 
 function turnos() {
@@ -339,3 +357,33 @@ function cambiandoColores() {
     };
     dibujarFichasPrincipales();
 };
+
+btnGuardar.addEventListener('click', function() {
+    event.preventDefault(); //evita que la pagina se refresque
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth().signInWithPopup(provider).then(function(datos) {
+        var usuario = {
+            displayName: datos.user.displayName,
+            email: datos.user.email,
+            uid: datos.user.uid,
+            punteo: conteoNegras
+        };
+        agregar(usuario.uid, usuario, usuario.fNegras);
+    });
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+
+    if (user) {
+        console.log('Existe Usuario');
+        console.log(user);
+    } else {
+        console.log('No extiste usuario');
+    };
+
+});
+
+function agregar(uid, usuario) {
+    refDB.child(uid).set(usuario);
+}

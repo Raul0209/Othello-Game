@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "test-juego-othello",
+    "juego Othello": "test-juego-othello"
+  }
+}

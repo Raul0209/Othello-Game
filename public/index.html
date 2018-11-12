@@ -27,9 +27,36 @@
     <div class="container main-container">
         <canvas id="fondo" width="500" height="400"></canvas>
     </div>
+    <div class="punteo">
+        <form>
+            <div class="form-group" style="position: fixed;left: 10px; top: 60px">
+                <label for="punteoNegras">Fichas Negras</label>
+                <input disabled class="form-control" placeholder="Cantidad Fichas" type="text" id="punteoNegras">
+                <div class="form-group">
+                    <label for="punteoBlancas">Fichas Blancas</label>
+                    <input readonly class="form-control" id="punteoBlancas" type="text" placeholder="Cantidad Fichas">
+                </div>
+                <button id="guardar" class="btn btn-primary">Guardar record</button>
+        </form>
+        </div>
+    </div>
     <footer class="bg-dark">
         &copy; Othello BLARGO 2018
     </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyCd9Hjl9TjEj125NC4OZ-TJyLsJzMdsCMw",
+            authDomain: "test-juego-othello.firebaseapp.com",
+            databaseURL: "https://test-juego-othello.firebaseio.com",
+            projectId: "test-juego-othello",
+            storageBucket: "test-juego-othello.appspot.com",
+            messagingSenderId: "130352810466"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="js/app.js"></script>
 </body>
 
