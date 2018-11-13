@@ -1,0 +1,45 @@
+Debemos tener instalado NodeJS
+Instalamos firebase en la consola con el comando
+	-npm install -g firebase-tools
+	-sudo npm install -g firebase-tools
+
+Luego en la consola colocamos el siguiente comando para loguearnos
+	-firebase login
+Nos vamos a la pagina de firebase y creamos un nuevo proyecto
+
+colocamos en la consola
+	-firebase init 
+
+colocamos solo la primera opcion
+
+luego elegimos a que programa le aplicaremos firebase y le damos enter
+Luego colocamos en la consola el comando:
+
+	-firebase use --add
+damos enter y le colocamos un Alias al proyecto
+
+Luego de esto colocamos en la consola
+	firebase serve
+
+
+
+nos vamos a firebase.json que esta en la carpeta donde hicimos todo y agregamos lo siguiente:
+
+	"hosting": {
+        "public": "public"
+    }
+
+uego en la carpeta creamos el index.html y el public que es una carpeta donde voy a meter toda la pagina web
+
+luego en la consola:
+	- firebase serve
+
+Y ya tenemos listo el entorno para poder trabajar en la pagina web y montar los recursos al servidor (base de datos)..
+
+
+vamos ala pgina web y configuramos con qeu app tendremos acceso y configuramos con las siguientes instrucciones.
+
+Desarrolla -Autenthication.
+Aqui colocamos el tipo de autenticacion que usaremos, en nuestro caso es google y lo activamos.
+
+
