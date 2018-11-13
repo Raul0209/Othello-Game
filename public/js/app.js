@@ -384,6 +384,21 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 });
 
+//Forma para aniadir datos
+//firebase.database().ref("usuarios").child("rldpMVE4QxbnWuRK1U6f0Ks8nws1").child("2018-12-02(200)").update({punteo: "100", fecha:"2018-12-01", tiempo: "00:00:30"})
+//Lee los datos y los muestra pero si se actualiza el registro no cambia en tiempo real debido al once, si usamos one si se reflejan los cambios
+//firebase.database().ref("usuarios").child('rldpMVE4QxbnWuRK1U6f0Ks8nws1').once('value', function(data){console.log(data.val())})
+
+
+//on metodo que esta fuera de linea, la modificacion que se haga en tiempo real no se ve reflejada
+//Al setear eliminamos la informacion y sobreescribimos, borra el nodo anterior y guarda el nuevo
+//Al pushear acumulamos la informacion, insertamos un nodo
+//El Update actualiza un nodo existente y si no existe lo inserta
 function agregar(uid, usuario) {
-    refDB.child(uid).set(usuario);
+    var d = new Date();
+    var mes = parseInt(d.getMonth()) + 1;
+    var n = d.getFullYear() + '-' + mes + '-' + d.getDate();
+
+    // refDB.child(uid).update(usuario);
+    refDB.child(uid).child(n + '(' + conteoNegras + ')').update({ score: { punteo: conteoNegras, fecha: n } });
 }
