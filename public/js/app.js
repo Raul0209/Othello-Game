@@ -1,7 +1,8 @@
 document.addEventListener("keydown", movimiento);
 var canvas = document.getElementById('fondo');
 var lapiz = canvas.getContext('2d');
-var btnGuardar = document.getElementById('guardar');
+var btnGuardarG = document.getElementById('guardar');
+var btnLogout = document.getElementById('btnLogout')
 const DIMENSION = 50;
 var x = 400;
 var y = 0;
@@ -10,25 +11,30 @@ var contador = 0;
 var matriz = new Array(8);
 var lblNegro = document.getElementById('punteoNegras');
 var lblAmarillo = document.getElementById('punteoBlancas');
+//Realiza la conexion a la base de firebase
 var refDB = firebase.database().ref('usuarios');
 var usuario = {}
 var conteoNegras = 0
 var conteoAmarillas = 0
+var refImage = firebase.storage().ref();
+var imagenRaul = document.getElementById('imagenRaul');
+var imagenFondo = document.getElementById('imagenFondo')
+var btnGuardarF = document.getElementById('btnGuardarF')
 
 var fondo = {
-    url: './Imagenes/Tablero.png',
+    url: 'https://firebasestorage.googleapis.com/v0/b/test-juego-othello.appspot.com/o/Tablero.png?alt=media&token=cb17db3f-36ba-4658-aa17-a53c26f4a7dd',
     imagen: Image,
     cargaOk: false
 };
 
 var amarilla = {
-    url: './Imagenes/Amarilla.png',
+    url: 'https://firebasestorage.googleapis.com/v0/b/test-juego-othello.appspot.com/o/Amarilla.png?alt=media&token=993a77e4-d7ae-4244-a2ab-6c0623bb466e',
     imagen: Image,
     cargaOk: false
 };
 
 var negra = {
-    url: './Imagenes/Negra.png',
+    url: 'https://firebasestorage.googleapis.com/v0/b/test-juego-othello.appspot.com/o/Negra.png?alt=media&token=ab01f9de-5114-467f-9f94-8ff8f61e911e',
     imagen: Image,
     cargaOk: false
 };
@@ -358,7 +364,8 @@ function cambiandoColores() {
     dibujarFichasPrincipales();
 };
 
-btnGuardar.addEventListener('click', function() {
+//Inicio de sesion con google
+btnGuardarG.addEventListener('click', function() {
     event.preventDefault(); //evita que la pagina se refresque
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -373,6 +380,17 @@ btnGuardar.addEventListener('click', function() {
     });
 });
 
+//Cierre de Sesion con google
+btnLogout.addEventListener('click', function() {
+    console.log('funciona')
+        //Evita que la pagina se recargue
+    event.preventDefault();
+    //Cierra la sesion;
+    firebase.auth().signOut();
+    window.location.reload(true);
+});
+
+//Comprueba si hay sesion de google
 firebase.auth().onAuthStateChanged(function(user) {
 
     if (user) {
@@ -384,11 +402,23 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 });
 
+//Inicio de sesion con Facebook
+btnGuardarF.addEventListener('click', function() {
+    event.preventDefault();
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('public_profile')
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log(result)
+    });
+})
+
 //Forma para aniadir datos
 //firebase.database().ref("usuarios").child("rldpMVE4QxbnWuRK1U6f0Ks8nws1").child("2018-12-02(200)").update({punteo: "100", fecha:"2018-12-01", tiempo: "00:00:30"})
 //Lee los datos y los muestra pero si se actualiza el registro no cambia en tiempo real debido al once, si usamos one si se reflejan los cambios
 //firebase.database().ref("usuarios").child('rldpMVE4QxbnWuRK1U6f0Ks8nws1').once('value', function(data){console.log(data.val())})
 
+//Para leer
+//firebase.database().ref("usuarios").child("uid").once("value",function(data){console.log(data.val())})
 
 //on metodo que esta fuera de linea, la modificacion que se haga en tiempo real no se ve reflejada
 //Al setear eliminamos la informacion y sobreescribimos, borra el nodo anterior y guarda el nuevo
@@ -402,3 +432,14 @@ function agregar(uid, usuario) {
     // refDB.child(uid).update(usuario);
     refDB.child(uid).child(n + '(' + conteoNegras + ')').update({ score: { punteo: conteoNegras, fecha: n } });
 }
+
+
+refImage.child('gomez.png').getDownloadURL().then(function(url) {
+    alert(url);
+    imagenRaul.src = url;
+});
+
+refImage.child('blanco.png').getDownloadURL().then(function(url) {
+    alert(url);
+    imagenFondo.src = url;
+});
